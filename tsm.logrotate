@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Dirty way to get the logfile name from TSM.
+FILE=$(grep '^SCHEDLOGNAME' /opt/tivoli/tsm/client/ba/bin/dsm.sys | awk '{print $2;}')
+LOGFILE=${FILE}.success
+
+if [ ! -f ${LOGFILE} ]; then
+	exit 0
+fi
+
+## archive old logs
+for i in 6 5 4 3 2 1
+do
+	if [ -f ${LOGFILE}.$i ]; then
+		mv ${LOGFILE}.$i ${LOGFILE}.`expr $i + 1` 
+	fi
+done
+
+# archive current log file
+cp ${LOGFILE} ${LOGFILE}.1
+
+# prune dsmc.sched once it reaches 10000 lines
+SIZE=$(wc -l $FILE| awk '{print $1;}')
+
+# check size, prune if too large
+if [ "$SIZE" -gt "10000" ]; then
+	mv $FILE ${FILE}.old
+fi
+
+ 

@@ -1,0 +1,51 @@
+#!/bin/bash
+# Check how many security updates are available for a debian System.
+# Author: Maik Glatki
+# Contact: maik.glatki@gmail.com
+# Last change: 2014-01-16
+
+export LANG=en
+TMP_SOURCES=`mktemp`
+TMP_DIR=`mktemp -d`
+
+# Make a source list only with security repositories
+grep security /etc/apt/sources.list > $TMP_SOURCES
+
+# Create temp dir
+mkdir -p ${TMP_DIR}/archives/partial
+mkdir -p ${TMP_DIR}/partial
+
+# Update the source list
+apt-get -q=2\
+ -o Debug::NoLocking=true\
+ -o Dir::cache=$TMP_DIR\
+ -o Dir::State::Lists=$TMP_DIR\
+ -o Dir::Etc::SourceList=$TMP_SOURCES update 2>/dev/null
+
+# Check if successful
+if [ $? != 0 ]; then
+ echo -1 # error code -1
+ # remove temp files to prevent filling up the hd
+ rm -rf $TMP_DIR
+ rm -f $TMP_SOURCES
+ exit
+fi
+
+# Make a dry run to check,
+# which security updates would be installed
+UPGRADE="apt-get -y -s\
+ -o Debug::NoLocking=true\
+ -o Dir::cache=$TMP_DIR\
+ -o Dir::State::Lists=$TMP_DIR\
+ -o Dir::Etc::SourceList=$TMP_SOURCES upgrade"
+
+# Execute upgarde and filter output
+if [ $1 = '--list' 2>/dev/null ]; then
+        $UPGRADE|(grep "^Inst"||echo "0 No updates")|cut -d " " -f 2-3
+else
+        $UPGRADE|grep -o "^[0-9]* upgraded"|cut -d" " -f1
+fi
+
+# Remove temp files
+rm -rf $TMP_DIR
+rm -f $TMP_SOURCES

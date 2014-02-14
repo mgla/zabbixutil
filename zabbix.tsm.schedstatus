@@ -1,0 +1,49 @@
+#! /bin/bash
+# File: zabbix.tsm.schedstatus
+# This script checks the status of the tsm update.
+# returns:
+
+OK=0
+OLD=1
+ERROR=2
+
+
+# Dirty way to get the logfile name from TSM.
+FILE=$(grep '^SCHEDLOGNAME' /opt/tivoli/tsm/client/ba/bin/dsm.sys | awk '{print $2;}')
+LOGFILE=${FILE}.success
+
+# one day in seconds
+H24=86400
+
+
+# get last date from log file
+LOGDATE=$(grep 'Successful' ${FILE} | tail -n 1 | awk '{print $1;}')
+DATE=$(date -d "$LOGDATE" '+%s')
+# two days margin for security
+MARGIN=$(expr $DATE + $H24 + $H24 )
+
+# todays date
+TODAY=$(date '+%s')
+
+
+# if last log entry more than two days old
+if [ "$MARGIN" -lt "$TODAY" ]; then
+	# log too old, return error and close
+	echo $OLD
+	exit $OLD 
+fi
+
+# if file date okay, update log file and check
+grep 'Successful' ${FILE} -A 10| tail -n 11 > ${LOGFILE}
+
+# now check log file 
+# check failed files
+FAILED=$(grep 'Total number of objects failed:' ${LOGFILE} | awk '{print $NF;}')
+if [ "$FAILED" -gt "0" ]; then
+	echo $ERROR
+	exit $ERROR
+fi
+
+# everything okay
+echo $OK
+exit $OK

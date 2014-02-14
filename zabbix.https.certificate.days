@@ -1,0 +1,24 @@
+#! /bin/bash
+# File: https.certificate.days
+# This script checks the number of days until a SSL certificate expires.
+# Output: number of days until it expires.
+
+HOST=localhost
+PORT=443
+
+# ignore certificate, since certificates are not valid for localhost..
+# get ending date
+END=`openssl s_client -host $HOST -port $PORT -showcerts -prexit </dev/null 2>/dev/null |
+          sed -n '/BEGIN CERTIFICATE/,/END CERT/p' |
+          openssl x509 -text 2>/dev/null |
+          sed -n 's/ *Not After : *//p'`
+
+if [ -n "$END" ]
+then
+	end_date_seconds=`date '+%s' --date "$END"`
+	now_seconds=`date '+%s'`
+	t=`expr $end_date_seconds - $now_seconds`
+	t=`expr $t / 86400`
+	echo $t
+fi
+
