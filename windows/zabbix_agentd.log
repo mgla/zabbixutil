@@ -1,0 +1,56 @@
+  1080:20140116:144129.990 Starting Zabbix Agent [ARGOS]. Zabbix 2.2.1 (revision 40801).
+  1080:20140116:144129.990 using configuration file: C:\zabbix\zabbix_agentd.conf
+  2472:20140116:144129.993 agent #0 started [collector]
+  3516:20140116:144129.993 agent #2 started [listener #2]
+  2196:20140116:144129.994 agent #1 started [listener #1]
+  1224:20140116:144129.994 agent #4 started [active checks #1]
+  3920:20140116:144129.994 agent #3 started [listener #3]
+  1224:20140116:144130.141 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  1224:20140116:144330.263 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  1224:20140116:144530.437 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  1224:20140116:144730.571 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  2832:20140116:144733.808 Zabbix Agent shutdown requested
+  2472:20140116:144734.573 zabbix_agentd collector stopped
+  1224:20140116:144734.620 zabbix_agentd active check stopped
+  2832:20140116:144734.822 Zabbix Agent stopped. Zabbix 2.2.1 (revision 40801).
+  3224:20140116:144919.642 Starting Zabbix Agent [ARGOS]. Zabbix 2.2.1 (revision 40801).
+  3224:20140116:144919.642 using configuration file: C:\zabbix\zabbix_agentd.conf
+   176:20140116:144919.658 agent #0 started [collector]
+  4084:20140116:144919.658 agent #3 started [listener #3]
+  2996:20140116:144919.658 agent #1 started [listener #1]
+  3448:20140116:144919.658 agent #4 started [active checks #1]
+   992:20140116:144919.658 agent #2 started [listener #2]
+  3448:20140116:144919.658 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  3448:20140116:145119.780 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  3448:20140116:145319.945 no active checks on server [137.226.13.11:10051]: host [ARGOS] not found
+  2824:20140116:163832.300 Zabbix Agent shutdown requested
+   176:20140116:163832.381 zabbix_agentd collector stopped
+  3448:20140116:163832.537 zabbix_agentd active check stopped
+  2996:20140116:163832.599 zabbix_agentd listener stopped
+  2824:20140116:163833.301 Zabbix Agent stopped. Zabbix 2.2.1 (revision 40801).
+  1960:20140116:164029.200 Starting Zabbix Agent [ARGOS]. Zabbix 2.2.1 (revision 40801).
+  1960:20140116:164029.200 using configuration file: C:\zabbix\zabbix_agentd.conf
+  1992:20140116:164029.216 agent #1 started [listener #1]
+  2000:20140116:164029.216 agent #3 started [listener #3]
+  1988:20140116:164029.216 agent #0 started [collector]
+  1996:20140116:164029.216 agent #2 started [listener #2]
+  2004:20140116:164029.216 agent #4 started [active checks #1]
+  2004:20140128:092147.599 active check configuration update from [137.226.13.11:10051] started to fail (ZBX_TCP_READ() failed: [0x0000274C] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+  2004:20140128:092351.177 active check configuration update from [137.226.13.11:10051] is working again
+  2004:20140128:092812.324 active check configuration update from [137.226.13.11:10051] started to fail (cannot connect to [[137.226.13.11]:10051]: [0x0000274C] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+  2004:20140128:093336.665 active check configuration update from [137.226.13.11:10051] is working again
+  2004:20140128:095157.368 active check configuration update from [137.226.13.11:10051] started to fail (cannot connect to [[137.226.13.11]:10051]: [0x0000274C] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+  2004:20140128:095721.747 active check configuration update from [137.226.13.11:10051] is working again
+  1848:20140203:124101.295 Zabbix Agent shutdown requested
+  1988:20140203:124101.854 zabbix_agentd collector stopped
+  2004:20140203:124101.985 zabbix_agentd active check stopped
+  1848:20140203:124102.299 Zabbix Agent stopped. Zabbix 2.2.1 (revision 40801).
+  1904:20140203:124312.291 Starting Zabbix Agent [ARGOS]. Zabbix 2.2.1 (revision 40801).
+  1904:20140203:124312.291 using configuration file: C:\zabbix\zabbix_agentd.conf
+  1948:20140203:124312.291 agent #0 started [collector]
+  1952:20140203:124312.291 agent #1 started [listener #1]
+  1956:20140203:124312.291 agent #2 started [listener #2]
+  1964:20140203:124312.291 agent #4 started [active checks #1]
+  1960:20140203:124312.291 agent #3 started [listener #3]
+  1964:20140218:133119.066 active check configuration update from [137.226.13.11:10051] started to fail (cannot connect to [[137.226.13.11]:10051]: [0x0000274C] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+  1964:20140218:133522.117 active check configuration update from [137.226.13.11:10051] is working again
