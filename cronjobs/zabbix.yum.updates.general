@@ -1,0 +1,4 @@
+#!/bin/sh
+# this script needs the zabbix security extensions.
+yum list updates | awk '{print $1;}' | grep x86_64 | wc -l > /var/tmp/zabbix.centos.updates
+chmod 644 /var/tmp/zabbix.centos.updates
