@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script implements log rotation for Tivoli in a horrible way.
 
 # Dirty way to get the logfile name from TSM.
 FILE=$(grep '^SCHEDLOGNAME' /opt/tivoli/tsm/client/ba/bin/dsm.sys | awk '{print $2;}')
