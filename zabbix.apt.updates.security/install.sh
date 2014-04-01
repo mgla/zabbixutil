@@ -18,3 +18,5 @@ if [ $COUNT -eq 0 ]; then
 	echo "installing zabbix UserParameter"
 	cat $DIR/UserParameter >> $ZABBIXCONF
 fi
+
+service zabbix-agent restart
