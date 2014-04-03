@@ -1,1 +1,1 @@
-UserParameter=apt.updates.security[*], cat /var/run/zabbix/apt.updates
+UserParameter=apt.updates.security[*], cat /var/run/zabbix/apt.updates.security
