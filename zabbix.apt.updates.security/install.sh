@@ -19,4 +19,5 @@ if [ $COUNT -eq 0 ]; then
 	cat $DIR/UserParameter >> $ZABBIXCONF
 fi
 
+/etc/cron.hourly/$CRONSCRIPT
 service zabbix-agent restart
