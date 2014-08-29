@@ -1,0 +1,24 @@
+#!/bin/bash
+# installs and configures zabbix-agent for debian64 (wheezy)
+
+FILENAME="zabbix-agent_2.2.6-1+wheezy_amd64.deb"
+DL64="http://repo.zabbix.com/zabbix/2.2/debian/pool/main/z/zabbix/$FILENAME"
+
+# Create tmp dir and download deb file, then install.
+TMPDIR=$(mktemp -d)
+pushd $TMPDIR
+wget $DL64
+if [ -e "$FILENAME" ]; then
+	dpkg -i $FILENAME
+	apt-get install -f
+fi
+popd
+rm -rf "$TMPDIR"
+
+
+# Basic configuration: Hostname, Zabbix server.
+IP="10.9.8.8"
+HOSTNAME=$(hostname)
+sed -i "s/^Server=.*$/Server=$IP/" /etc/zabbix/zabbix_agentd.conf
+sed -i "s/^ServerActive=.*$/ServerActive=$IP/" /etc/zabbix/zabbix_agentd.conf
+sed -i "s/^Hostname=.*$/Hostname=$HOSTNAME/" /etc/zabbix/zabbix_agentd.conf
