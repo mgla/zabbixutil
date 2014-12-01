@@ -1,0 +1,1 @@
+UserParameter=tomcat.reachable, wget -q -O - localhost:8080/ | grep "<title>Apache Tomcat</title>" | wc -l
