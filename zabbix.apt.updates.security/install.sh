@@ -13,11 +13,12 @@ install $DIR/zabbix.$SCRIPT /usr/local/bin/$SCRIPT
 # run once
 /etc/cron.hourly/$CRONSCRIPT
 
+# Check if item is installed.
 COUNT=$(grep "$SCRIPT" $ZABBIXCONF| wc -l)
 if [ $COUNT -eq 0 ]; then
-	echo "Installing zabbix item: $SCRIPT"
+	echo "Installing item: $SCRIPT."
 	cat $DIR/UserParameter >> $ZABBIXCONF
 	service zabbix-agent restart
 else
-	echo "Item already installed: $SCRIPT"
+	echo "Item already installed: $SCRIPT."
 fi
