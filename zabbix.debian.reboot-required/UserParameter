@@ -1,0 +1,1 @@
+UserParameter=debian.reboot-required, if [ -f /var/run/reboot-required ]; then echo 1; else echo 0; fi
