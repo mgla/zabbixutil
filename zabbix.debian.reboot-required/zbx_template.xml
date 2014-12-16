@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-12-16T13:24:22Z</date>
+    <date>2014-12-16T13:47:43Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -74,11 +74,11 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template OS Debian:debian.reboot-required.last(0)}&gt;1</expression>
+            <expression>{Template OS Debian:debian.reboot-required.last(0)}&gt;0</expression>
             <name>Reboot required by Debian.</name>
             <url/>
             <status>0</status>
-            <priority>1</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <dependencies/>
