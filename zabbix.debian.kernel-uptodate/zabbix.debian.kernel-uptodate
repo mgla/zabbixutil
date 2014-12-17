@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+# Script to check if currently running kernel is the newest one installed with apt.
+# Author: Maik Glatki <maik.glatki@gmail.com>
+# Needs egrep, dpkg, awk, grep, uname.
+# Should all be installed with debian default.
+
+use strict;
+use warnings;
+
+# get kernel list
+my $cmd = 'dpkg -l| egrep \'^ii  linux-(im|he)\'| grep -v linux-image-virtual | awk \'{print $2}\'';
+my @installed = sort split("\n", qx/$cmd/);
+my $running = qx/uname -r/;
+chomp $running;
+
+if ($running eq substr($installed[-2],-(length($running)))) {
+    print "1\n";
+} else {
+    print "0\n";
+}
