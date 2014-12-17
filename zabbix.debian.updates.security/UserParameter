@@ -1,1 +1,1 @@
-UserParameter=debian.updates.security[*], cat /var/run/zabbix/zabbix.debian.updates.security
+UserParameter=debian.updates.security[*], cat /var/run/zabbix/debian.updates.security
