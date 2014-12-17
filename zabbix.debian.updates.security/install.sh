@@ -1,15 +1,15 @@
 #!/bin/bash
 # Installscript
 
-SCRIPT=apt.updates.security
+SCRIPT=debian.updates.security
 ZABBIXCONF=/etc/zabbix/zabbix_agentd.conf
 # run-parts does not run files containing periods
-CRONSCRIPT=$(echo $SCRIPT| sed 's/\./_/g')
+CRONSCRIPT=$(echo "zabbix.$SCRIPT" | sed 's/\./_/g')
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Cronjob for updating
 install $DIR/cronjob /etc/cron.hourly/$CRONSCRIPT
-install $DIR/zabbix.$SCRIPT /usr/local/bin/$SCRIPT
+install $DIR/zabbix.$SCRIPT /usr/local/bin/zabbix.$SCRIPT
 # run once
 /etc/cron.hourly/$CRONSCRIPT
 

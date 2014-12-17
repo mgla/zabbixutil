@@ -1,5 +1,0 @@
-#!/bin/bash
-# Cronjob for keeping track of security updates
-
-/usr/local/bin/zabbix.apt.updates.security > /var/run/zabbix/apt.updates.security
-

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Cronjob for keeping track of security updates
+
+/usr/local/bin/zabbix.debian.updates.security > /var/run/zabbix/debian.updates.security
+
