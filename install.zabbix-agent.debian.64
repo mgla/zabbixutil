@@ -1,7 +1,7 @@
 #!/bin/bash
 # installs and configures zabbix-agent for debian64 (wheezy)
 
-FILENAME="zabbix-agent_2.2.6-1+wheezy_amd64.deb"
+FILENAME="zabbix-agent_2.2.8-1+wheezy_amd64.deb"
 DL64="http://repo.zabbix.com/zabbix/2.2/debian/pool/main/z/zabbix/$FILENAME"
 
 # Create tmp dir and download deb file, then install.
