@@ -1,1 +1,0 @@
-UserParameter=debian.ssh.allowroot, grep '^[[:space:]]*PermitRootLogin[[:space:]]\+yes' /etc/ssh/sshd_config |wc -l
