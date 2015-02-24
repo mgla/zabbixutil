@@ -1,0 +1,1 @@
+UserParameter=debian.ssh.passwordauthentication, grep '^[[:space:]]*PasswordAuthentication[[:space:]]\+yes' /etc/ssh/sshd_config |wc -l
