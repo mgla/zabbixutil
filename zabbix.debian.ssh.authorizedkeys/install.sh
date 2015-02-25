@@ -7,7 +7,7 @@ ZABBIXCONF=/etc/zabbix/zabbix_agentd.conf
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 apt-get update
-apt-get -y -R install libfile-homedir-perl
+apt-get -y --no-install-recommends install libfile-homedir-perl
 
 install $DIR/zabbix.$SCRIPT /usr/local/bin/zabbix.$SCRIPT
 
