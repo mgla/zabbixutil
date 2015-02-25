@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+# Checks for suspicious authorized_keys files.
+# Author: Maik Glatki <maik.glatki@gmail.com>, 2015
+
+use strict;
+use warnings;
+
+use File::HomeDir;
+
+# Users to check
+my @users = qw(
+    www-data
+    root
+);
+
+my @suspects = ();
+foreach my $user ( @users ) {
+    if ( -e File::HomeDir->users_home($user)."/.ssh/authorized_keys" ) {
+        push @suspects, $user;
+    }
+}
+
+print join( ",", @suspects );

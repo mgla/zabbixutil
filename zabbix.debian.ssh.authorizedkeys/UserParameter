@@ -1,0 +1,1 @@
+UserParameter=debian.ssh.authorizedkeys, /usr/local/bin/zabbix.debian.ssh.authorizedkeys
