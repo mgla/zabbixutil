@@ -17,6 +17,8 @@ fi
 # Cronjobs and programs
 install $DIR/zabbix.$SCRIPT /usr/local/bin/zabbix.$SCRIPT
 install $DIR/cronjob /etc/cron.hourly/$CRONSCRIPT
+# Fix obsolete config
+sed -i "s,^\(UserParameter=debian\.ssh\.authorizedkeys\),#\1," /etc/zabbix/zabbix_agentd.conf
 # UserParameter
 install --mode=644 $DIR/conf /etc/zabbix/zabbix_agentd.d/$SCRIPT.conf
 
