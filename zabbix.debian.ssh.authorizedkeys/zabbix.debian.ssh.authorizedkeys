@@ -20,4 +20,8 @@ foreach my $user ( @users ) {
     }
 }
 
-print join( ",", @suspects );
+if ( scalar @suspects ) {
+    print join( ",", @suspects );
+} else {
+    print " ";
+}
