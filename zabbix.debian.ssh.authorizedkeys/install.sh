@@ -20,13 +20,5 @@ install $DIR/cronjob /etc/cron.hourly/$CRONSCRIPT
 # UserParameter
 install $DIR/conf /etc/zabbix/zabbix_agentd.d/$SCRIPT.conf
 
-## Check if item is installed.
-#COUNT=$(grep "$SCRIPT" $ZABBIXCONF| wc -l)
-#if [ $COUNT -eq 0 ]; then
-#	echo "Installing item: $SCRIPT."
-#	cat $DIR/UserParameter >> $ZABBIXCONF
-#	service zabbix-agent restart
-#else
-#	echo "Item already installed: $SCRIPT."
-#fi
-
+# Restart Zabbix service.
+service zabbix-agent restart
