@@ -18,7 +18,7 @@ fi
 install $DIR/zabbix.$SCRIPT /usr/local/bin/zabbix.$SCRIPT
 install $DIR/cronjob /etc/cron.hourly/$CRONSCRIPT
 # UserParameter
-install $DIR/conf /etc/zabbix/zabbix_agentd.d/$SCRIPT.conf
+install --mode=644 $DIR/conf /etc/zabbix/zabbix_agentd.d/$SCRIPT.conf
 
 # Restart Zabbix service.
 service zabbix-agent restart
