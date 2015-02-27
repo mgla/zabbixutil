@@ -1,0 +1,94 @@
+#!/usr/bin/perl
+# Installer for debian zabbix items and checks.
+# Author: Maik Glatki <maik.glatki@gmail.com>, 2014-2015
+
+use strict;
+use warnings;
+
+# Core modules
+use File::Copy;
+use Cwd 'abs_path';
+use File::Basename;
+
+use constant PACK    => "debian";
+use constant ZABBIX  => "/etc/zabbix";
+use constant ZABBIXGLOBAL => ZABBIX . "/zabbix_agentd.conf";
+use constant ZABBIXD => ZABBIX . "/zabbix_agentd.d";
+use constant BINDIR => "/usr/local/bin";
+
+use constant DEBUG => 1;
+
+# Get install script directory
+my $BASE = dirname(abs_path(__FILE__));
+
+# Items considered stable and safe for fully automated installation.
+my @stable = qw(
+    reboot-required
+    ssh.authorizedkeys
+    ssh.passwordauthentication
+    ssh.permitrootlogin
+    updates.security
+);
+
+# Install needed dependencies
+my @deblist = qw(
+    libfile-homedir-perl
+);
+my @toinstall = ();
+
+foreach my $deb ( @deblist ) {
+    my $installed = `dpkg -s $deb 2> /dev/null | grep -c "install ok installed"`;
+    chomp $installed;
+    if ( $installed eq '0' ) {
+        push @toinstall, $deb;
+    }
+}
+if ( scalar @toinstall ) {
+    system( "apt-get update" );
+    system( "apt-get -y --no-install-recommends install " . join ( " " , @toinstall ) );
+}
+
+foreach my $item ( @stable ) {
+    my $packitem = PACK . '.' . $item;
+    my $fullitem = "zabbix." . $packitem;
+    my ( $crontab, $program, $conf ) = ( "$BASE/$item/crontab" , "$BASE/$item/program", "$BASE/$item/conf" );
+    if ( ! -e $conf ) {
+        print STDERR "Skipping item $item. No configuration file available.\n";
+        next;
+    }
+    # Remove obsolete custom UserParameters from zabbix agent configuration.
+    my $seditem = $packitem;
+    $seditem =~ s/\./\\\./g;
+    my $checkcmd = "grep -c '^UserParameter=$seditem' " . ZABBIXGLOBAL;
+    my $obsolete = qx/$checkcmd/;
+    chomp $obsolete;
+    unless ( $obsolete eq '0' ) {
+        print STDERR "Remove obsolete item $fullitem from global zabbix configuration.\n";
+        my $sedcmd = 'sed -i \'s,^\(UserParameter=' . $seditem . '\),#\1,\' ' . ZABBIXGLOBAL;
+        system ( $sedcmd );
+    }
+    # If package has crontab, install
+    if ( -e $crontab ) {
+        # Change crontab file name to something cron will actually run.
+        my $cronfn = $fullitem;
+        $cronfn =~ s/\./_/g;
+        _install( $crontab,  "/etc/cron.d/$cronfn", 0644 );
+    }
+    # install item, and program
+    _install( "$program", BINDIR . "/$fullitem", 0755 );
+    _install( "$conf", ZABBIXD . "/$packitem.conf", 0644 );
+}
+
+# Restart Zabbix service.
+system( "service zabbix-agent restart" );
+
+sub _install {
+    my ( $source, $target, $perm, @bad ) = @_;
+    die "Too mana parameters" if @bad;
+    if ( DEBUG ) {
+        print STDERR "_install $source, $target\n";
+    }
+    copy( $source, $target);
+    chmod $perm, $target;
+    chown 0, 0 , $target;
+}

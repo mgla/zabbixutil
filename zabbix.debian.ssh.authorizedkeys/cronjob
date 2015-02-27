@@ -1,5 +1,0 @@
-#!/bin/bash
-# Cronjob for keeping track of security updates
-
-/usr/local/bin/zabbix.debian.ssh.authorizedkeys > /var/run/zabbix/debian.ssh.authorizedkeys
-
