@@ -16,7 +16,7 @@ use constant ZABBIXGLOBAL => ZABBIX . "/zabbix_agentd.conf";
 use constant ZABBIXD => ZABBIX . "/zabbix_agentd.d";
 use constant BINDIR => "/usr/local/bin";
 
-use constant DEBUG => 1;
+use constant DEBUG => 0;
 
 # Get install script directory
 my $BASE = dirname(abs_path(__FILE__));
