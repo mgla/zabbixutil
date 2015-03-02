@@ -80,7 +80,7 @@ foreach my $item ( @stable ) {
 }
 
 # Restart Zabbix service.
-system( "service zabbix-agent restart" );
+system( "/usr/sbin/service zabbix-agent restart" );
 
 sub _install {
     my ( $source, $target, $perm, @bad ) = @_;
