@@ -79,6 +79,12 @@ foreach my $item ( @stable ) {
     _install( "$conf", ZABBIXD . "/$packitem.conf", 0644 );
 }
 
+# If installed update update crontab
+my ( $auto_src, $auto_tar ) = ( "/opt/zabbixutil/crontabs/zabbix_autoupdate", "/etc/cron.d/zabbix_autoupdate");
+if ( ( -f $auto_src ) && ( -f $auto_tar ) ) {
+    _install( $auto_src, $auto_tar, 0644 );
+}
+
 # Restart Zabbix service.
 system( "/usr/sbin/service zabbix-agent restart" );
 
