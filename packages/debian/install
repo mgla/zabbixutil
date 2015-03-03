@@ -86,7 +86,7 @@ if ( ( -f $auto_src ) && ( -f $auto_tar ) ) {
 }
 
 # Restart Zabbix service.
-system( "/usr/sbin/service zabbix-agent restart" );
+system( "/usr/sbin/service zabbix-agent restart > /dev/null" );
 
 sub _install {
     my ( $source, $target, $perm, @bad ) = @_;
