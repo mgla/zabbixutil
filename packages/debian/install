@@ -23,6 +23,7 @@ my $BASE = dirname(abs_path(__FILE__));
 
 # Items considered stable and safe for fully automated installation.
 my @stable = qw(
+    apache.sslunsafe
     reboot-required
     ssh.authorizedkeys
     ssh.passwordauthentication

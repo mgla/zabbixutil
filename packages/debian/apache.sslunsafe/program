@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+# Checks for unsafe apache2 ssl configuration.
+# Author: Maik Glatki <maik.glatki@gmail.com>, 2015
+
+use strict;
+use warnings;
+
+my $SSLProtocol = 0;
+use constant SSLCONF => "/etc/apache2/mods-enabled/ssl.conf";
+if ( -d "/etc/apache2" ) {
+    if ( -f SSLCONF ) {
+        # grep file for unsafe protocols
+        open( my $fh, SSLCONF );
+        my @sslproto = sort grep( /^\s*SSLProtocol\s+All\s+-SSLv2\s+-SSLv3\s*$/i, <$fh> );
+        unless ( scalar @sslproto ) {
+            $SSLProtocol = 1;
+        }
+        close( $fh );
+    }
+}
+
+my @errors = ();
+if ( $SSLProtocol ) { push @errors, "SSLProtocol"; }
+
+if ( scalar @errors ) {
+    print join( ",", @errors );
+} else {
+    print " ";
+}

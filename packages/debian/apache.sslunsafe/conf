@@ -1,0 +1,1 @@
+UserParameter=debian.apache.sslunsafe, /usr/local/bin/zabbix.debian.ssh.authorizedkeys
