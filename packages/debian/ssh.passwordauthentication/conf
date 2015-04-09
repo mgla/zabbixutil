@@ -1,1 +1,1 @@
-UserParameter=debian.ssh.passwordauthentication, grep '^[[:space:]]*PasswordAuthentication[[:space:]]\+yes' /etc/ssh/sshd_config |wc -l
+UserParameter=debian.ssh.passwordauthentication, PA=$(grep '^[[:space:]]*PasswordAuthentication[[:space:]]\+yes' /etc/ssh/sshd_config | wc -l); if [ "$PA" -lt "1" ]; then echo 1; else echo 0; fi
