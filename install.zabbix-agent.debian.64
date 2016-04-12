@@ -15,10 +15,9 @@ fi
 popd
 rm -rf "$TMPDIR"
 
-
 # Basic configuration: Hostname, Zabbix server.
 IP="10.9.8.8"
-HOSTNAME=$(hostname)
 sed -i "s/^Server=.*$/Server=$IP/" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/^ServerActive=.*$/ServerActive=$IP/" /etc/zabbix/zabbix_agentd.conf
-sed -i "s/^Hostname=.*$/Hostname=$HOSTNAME/" /etc/zabbix/zabbix_agentd.conf
+sed -i "s/^Hostname=.*$/#Hostname=/" /etc/zabbix/zabbix_agentd.conf
+sed -i "s/^HostnameItem=.*$/HostnameItem=system.hostname/" /etc/zabbix/zabbix_agentd.conf
