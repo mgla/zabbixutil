@@ -1,11 +1,16 @@
 #!/usr/bin/perl
 # Checks for suspicious authorized_keys files.
-# Author: Maik Glatki <maik.glatki@gmail.com>, 2015
+# Proof of concept, not for production use.
+# Author: Maik Glatki <maik@glatki.eu>, 2015-2016
 
 use strict;
 use warnings;
 
-use File::HomeDir;
+# Core modules
+require File::Spec;
+
+# Extra modules
+require File::HomeDir;
 
 # Users to check
 my @users = qw(
@@ -14,8 +19,9 @@ my @users = qw(
 );
 
 my @suspects = ();
-foreach my $user ( @users ) {
-    if ( -e File::HomeDir->users_home($user)."/.ssh/authorized_keys" ) {
+for my $user (@users) {
+    my $checkhomedir =  File::HomeDir->users_home($user);
+    if ($checkhomedir && -e (File::Spec->catfile($checkhomedir, '.ssh', 'authorized_keys'))) {
         push @suspects, $user;
     }
 }
